@@ -1,3 +1,41 @@
 .App {
   text-align: center;
 }
+
+.form_container {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0px;
+  padding: 20px;
+  width: 100%;
+}
+
+.app__form {
+  padding: 20px;
+  z-index: 1;
+  background-color: #e9e9eb;
+  position: relative;
+  width: 100%;
+  margin: 0px;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 10px grey;
+  border-radius: 1em;
+}
+
+.app__formControl {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.app__input {
+  flex: 1;
+}
+
+.app__iconButton {
+  flex: 0;
+}
+
+.messages__container {
+  z-index: "-1";
+  margin-bottom: 200px;
+}
