@@ -29,8 +29,8 @@ All Rights Reserved.*/
   padding-bottom: 6px;
   padding-left: 12px;
   width: fit-content;
-  max-width: 45%;
-  overflow-wrap: break-word;
+  max-width: 75%;
+  overflow-wrap: anywhere;
   font-size: 15px !important;
   text-align: left !important;
 }
@@ -51,6 +51,7 @@ All Rights Reserved.*/
 
 .message__card {
   border-radius: "1.3em";
+  width: fit-content;
 }
 
 .message__cardContent {
