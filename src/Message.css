@@ -28,15 +28,16 @@ All Rights Reserved.*/
   padding-right: 12px;
   padding-bottom: 6px;
   padding-left: 12px;
-  width: fit-content;
-  max-width: 75%;
-  overflow-wrap: anywhere;
+  /* width: fit-content; */
+  word-break: break-word;
+  max-width: 70%;
   font-size: 15px !important;
   text-align: left !important;
 }
 
 .message__user {
   margin-left: auto;
+  text-align: right !important;
 }
 
 .message__userCard {
@@ -51,7 +52,7 @@ All Rights Reserved.*/
 
 .message__card {
   border-radius: "1.3em";
-  width: fit-content;
+  /* width: fit-content; */
 }
 
 .message__cardContent {
