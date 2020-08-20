@@ -58,10 +58,13 @@ function App() {
       ) : (
         <>
           <div className="greeting">
-            <h2>
-              Hello {username} ({useremail}) 💝{" "}
-            </h2>
-            <h2>Welcome to Open Messenger!!!</h2>
+            <div>
+              <img src="Logo.png" alt="Open Messenger Logo" />
+              <h4>Open Messenger</h4>
+            </div>
+            <h4>
+              {username} ({useremail})
+            </h4>
           </div>
 
           <div className="form_container">

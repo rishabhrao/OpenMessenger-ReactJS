@@ -5,6 +5,23 @@ All Rights Reserved.*/
   text-align: center;
 }
 
+.greeting {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #eb8d00;
+}
+
+.greeting > div {
+  display: flex;
+  justify-content: center;
+}
+
+.greeting > div > img {
+  object-fit: contain;
+  height: 25px;
+}
+
 .form_container {
   box-sizing: border-box;
   position: fixed;
@@ -40,5 +57,5 @@ All Rights Reserved.*/
 
 .messages__container {
   z-index: "-1";
-  margin-bottom: 200px;
+  margin-bottom: 125px;
 }
