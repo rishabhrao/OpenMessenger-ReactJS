@@ -7,6 +7,6 @@
 
 
 ## Some Screenshots:
-![](https://rishabhrao.imfast.io/Login.png)
+![](https://ik.imagekit.io/rishabhrao/Open_Messenger/Login.png)
 
-![](https://rishabhrao.imfast.io/Thumb.png)
+![](https://ik.imagekit.io/rishabhrao/Open_Messenger/Thumb.png)
