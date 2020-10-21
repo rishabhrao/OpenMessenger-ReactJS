@@ -2,60 +2,64 @@
 All Rights Reserved.*/
 
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .greeting {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-  background-color: #eb8d00;
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+	background-color: #eb8d00;
 }
 
 .greeting > div {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .greeting > div > img {
-  object-fit: contain;
-  height: 25px;
+	object-fit: contain;
+	height: 25px;
 }
 
 .form_container {
-  box-sizing: border-box;
-  position: fixed;
-  bottom: 0px;
-  padding: 20px;
-  width: 100%;
+	box-sizing: border-box;
+	position: fixed;
+	bottom: 0px;
+	padding: 20px;
+	width: 100%;
 }
 
 .app__form {
-  padding: 20px;
-  z-index: 1;
-  background-color: #e9e9eb;
-  position: relative;
-  width: 100%;
-  margin: 0px;
-  box-sizing: border-box;
-  box-shadow: 10px 10px 10px grey;
-  border-radius: 1em;
+	padding: 20px;
+	z-index: 1;
+	background-color: #e9e9eb;
+	position: relative;
+	width: 100%;
+	margin: 0px;
+	box-sizing: border-box;
+	box-shadow: 10px 10px 10px grey;
+	border-radius: 1em;
 }
 
 .app__formControl {
-  display: flex !important;
-  flex-direction: row !important;
+	display: flex !important;
+	flex-direction: row !important;
 }
 
 .app__input {
-  flex: 1;
+	flex: 1;
 }
 
 .app__iconButton {
-  flex: 0;
+	flex: 0;
 }
 
 .messages__container {
-  z-index: "-1";
-  margin-bottom: 125px;
+	z-index: "-1";
+	margin-bottom: 125px;
+}
+
+.greeting__right h4 {
+	margin: 10px;
 }
