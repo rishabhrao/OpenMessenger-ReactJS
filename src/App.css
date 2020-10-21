@@ -1,65 +1,27 @@
 /*Copyright © 2020 Rishabh Rao.
 All Rights Reserved.*/
 
-.App {
-	text-align: center;
+.chats__container {
+	display: grid;
+	place-items: center;
+	flex-direction: column;
+	margin: 25px;
 }
 
-.greeting {
-	display: flex;
-	justify-content: space-between;
-	padding: 5px;
-	background-color: #eb8d00;
-}
-
-.greeting > div {
-	display: flex;
-	justify-content: center;
-}
-
-.greeting > div > img {
-	object-fit: contain;
-	height: 25px;
-}
-
-.form_container {
-	box-sizing: border-box;
+.fab {
 	position: fixed;
 	bottom: 0px;
+	right: 0px;
 	padding: 20px;
-	width: 100%;
 }
 
-.app__form {
-	padding: 20px;
-	z-index: 1;
-	background-color: #e9e9eb;
-	position: relative;
-	width: 100%;
-	margin: 0px;
-	box-sizing: border-box;
-	box-shadow: 10px 10px 10px grey;
-	border-radius: 1em;
+.text {
+	margin: 10px !important;
 }
 
-.app__formControl {
+.newform {
+	margin-top: 20px !important;
 	display: flex !important;
-	flex-direction: row !important;
-}
-
-.app__input {
-	flex: 1;
-}
-
-.app__iconButton {
-	flex: 0;
-}
-
-.messages__container {
-	z-index: "-1";
-	margin-bottom: 125px;
-}
-
-.greeting__right h4 {
-	margin: 10px;
+	flex-direction: column !important;
+	justify-content: space-between !important;
 }

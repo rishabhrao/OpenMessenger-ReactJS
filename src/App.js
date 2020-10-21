@@ -1,70 +1,157 @@
 /*Copyright © 2020 Rishabh Rao.
 All Rights Reserved.*/
 
-import React, { useState, useEffect, useRef } from "react";
-import { Button, FormControl, Input } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import Message from "./Message";
-import db, { auth } from "./firebase";
+import db from "./firebase";
 import firebase from "firebase";
-import SendIcon from "@material-ui/icons/Send";
-import { IconButton } from "@material-ui/core";
 import { useStateValue } from "./StateProvider";
 import Login from "./Login";
-import { actionTypes } from "./reducer";
+import Header from "./Header";
+import Chats from "./Chats";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import TextField from "@material-ui/core/TextField";
+import { Button, FormControl, Input } from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
+import validator from "email-syntax-validator";
 
 function App() {
-	const [input, setInput] = useState("");
-	const [messages, setMessages] = useState([
-		{ username: "", useremail: "", message: "" },
-	]);
+	const getModalStyle = () => {
+		const top = 50 + Math.round(Math.random() * 20) - 10;
+		const left = 50 + Math.round(Math.random() * 20) - 10;
+
+		return {
+			top: `${top}%`,
+			left: `${left}%`,
+			transform: `translate(-${top}%, -${left}%)`,
+		};
+	};
+
+	const useStyles = makeStyles((theme) => ({
+		paper: {
+			position: "absolute",
+			display: "grid",
+			placeContent: "center",
+			width: "60vw",
+			backgroundColor: theme.palette.background.paper,
+			border: "2px solid #000",
+			boxShadow: theme.shadows[5],
+			padding: theme.spacing(2, 4, 3),
+		},
+	}));
+
+	const history = useHistory();
+
 	const [{ username, useremail }, dispatch] = useStateValue();
 
-	//Read Messages from Firestore Database
-	useEffect(() => {
-		db.collection("messages")
-			.orderBy("timestamp", "asc")
-			.onSnapshot((snapshot) => {
-				setMessages(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						message: doc.data(),
-					})),
-				);
-			});
-	}, []);
+	const [newEmail, setNewEmail] = useState("");
+	const [newName, setNewName] = useState("");
 
-	const sendMessage = (event) => {
+	const classes = useStyles();
+	// getModalStyle is not a pure function, we roll the style only on the first render
+	const [modalStyle] = React.useState(getModalStyle);
+	const [open, setOpen] = React.useState(false);
+
+	const handleOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const startNewChat = (event) => {
 		event.preventDefault();
 
-		//Write Messages to Firestore Database
-		db.collection("messages").add({
-			message: input,
-			username: username,
-			useremail: useremail,
-			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-		});
-		setInput("");
-	};
+		const valid = validator.validate(newEmail);
 
-	const messagesEndRef = useRef(null);
+		if (valid) {
+			if (newEmail > useremail) {
+				var user1email = newEmail;
+				var user1name = newName;
+				var user2email = useremail;
+				var user2name = username;
+			} else {
+				var user1email = useremail;
+				var user1name = username;
+				var user2email = newEmail;
+				var user2name = newName;
+			}
 
-	const scrollToBottom = () => {
-		messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-	};
+			var chatid = user1email + user2email;
 
-	useEffect(scrollToBottom, [messages]);
-
-	const signOut = () => {
-		if (useremail) {
-			auth.signOut();
-			dispatch({
-				type: actionTypes.SET_USER,
-				username: null,
-				useremail: null,
+			//Write New Chatroom to Firestore Database
+			db.collection("chatrooms").doc(chatid).set({
+				user1email: user1email,
+				user1name: user1name,
+				user2email: user2email,
+				user2name: user2name,
 			});
+			setNewName("");
+			setNewEmail("");
+
+			history.push(`/${chatid}`);
+		} else {
+			alert("Invalid Email Address.");
 		}
 	};
+
+	const body = (
+		<div style={modalStyle} className={classes.paper}>
+			<h2 id="simple-modal-title">
+				Please enter details of the person you want to Chat with:
+			</h2>
+			<form className="newform">
+				<Input
+					autoFocus
+					type="email"
+					value={newEmail}
+					onChange={(e) => setNewEmail(e.target.value)}
+					id="standard-basic"
+					className="text"
+					placeholder="email"
+				/>
+				<Input
+					value={newName}
+					type="text"
+					onChange={(e) => setNewName(e.target.value)}
+					id="standard-basic"
+					className="text"
+					placeholder="name"
+				/>
+				<Button
+					variant="contained"
+					color="primary"
+					disabled={newEmail.length === 0 || newName.length === 0}
+					onClick={startNewChat}
+					type="submit"
+				>
+					Start Chat
+				</Button>
+			</form>
+		</div>
+	);
+
+	const [input, setInput] = useState("");
+	const [chatrooms, setChatrooms] = useState([]);
+
+	//Read Chatrooms from Firestore Database
+	useEffect(() => {
+		db.collection("chatrooms").onSnapshot((snapshot) => {
+			setChatrooms(
+				snapshot.docs.map((doc) => ({
+					id: doc.id,
+					user1email: doc.data().user1email,
+					user1name: doc.data().user1name,
+					user2email: doc.data().user2email,
+					user2name: doc.data().user2name,
+				})),
+			);
+		});
+	}, []);
 
 	return (
 		<div className="App">
@@ -72,64 +159,72 @@ function App() {
 				<Login />
 			) : (
 				<>
-					<div className="greeting">
-						<div>
-							<img src="Logo.png" alt="Open Messenger Logo" />
-							<h4>Open Messenger</h4>
-						</div>
-						<div className="greeting__right">
-							<h4>
-								{username} ({useremail})
-							</h4>
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={signOut}
-							>
-								Sign Out
-							</Button>
-						</div>
-					</div>
+					<Header />
 
-					<div className="form_container">
-						<form className="app__form">
-							<FormControl className="app__formControl">
-								<Input
-									autoFocus
-									className="app__input"
-									placeholder="Enter Message..."
-									value={input}
-									onChange={(event) =>
-										setInput(event.target.value)
+					{chatrooms.every(
+						(chat, i) => chatrooms[i].user1email !== useremail,
+					) &&
+					chatrooms.every(
+						(chat, i) => chatrooms[i].user2email !== useremail,
+					) ? (
+						<h1>
+							You don't have any chats. Please Click on the New
+							Chat Button below to start a conversation.
+						</h1>
+					) : (
+						<div className="chats__container">
+							{chatrooms.map(
+								({
+									id,
+									user1email,
+									user1name,
+									user2email,
+									user2name,
+								}) => {
+									if (
+										user1email == useremail ||
+										user2email == useremail
+									) {
+										return (
+											<Chats
+												key={id}
+												id={id}
+												name={
+													user1email === useremail
+														? user2name
+														: user1name
+												}
+												email={
+													user1email === useremail
+														? user2email
+														: user1email
+												}
+											/>
+										);
 									}
-								/>
-								<IconButton
-									className="app__iconButton"
-									disabled={!input.replace(/\s/g, "").length}
-									variant="contained"
-									color="primary"
-									type="submit"
-									onClick={sendMessage}
-								>
-									<SendIcon />
-								</IconButton>
-							</FormControl>
-						</form>
+								},
+							)}
+						</div>
+					)}
+					<div className="fab" onClick={handleOpen}>
+						<Fab
+							color="primary"
+							aria-label="add"
+							variant="extended"
+						>
+							<AddIcon /> New Chat
+						</Fab>
 					</div>
-
-					<div className="messages__container">
-						{messages.map(({ id, message }) => (
-							<Message
-								key={id}
-								username={username}
-								useremail={useremail}
-								message={message}
-							/>
-						))}
-					</div>
+					<Modal
+						open={open}
+						onClose={handleClose}
+						aria-labelledby="simple-modal-title"
+						aria-describedby="simple-modal-description"
+					>
+						{body}
+					</Modal>
 				</>
 			)}
-			<div ref={messagesEndRef} />
 		</div>
 	);
 }

@@ -5,17 +5,24 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import Chat from "./Chat";
 import * as serviceWorker from "./serviceWorker";
 import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <App />
-    </StateProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+	<React.StrictMode>
+		<StateProvider initialState={initialState} reducer={reducer}>
+			<Router>
+				<Switch>
+					<Route path="/" component={App} exact />
+					<Route path="/:chatid" component={Chat} />
+				</Switch>
+			</Router>
+		</StateProvider>
+	</React.StrictMode>,
+	document.getElementById("root"),
 );
 
 // If you want your app to work offline and load faster, you can change

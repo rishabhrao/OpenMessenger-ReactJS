@@ -1,0 +1,34 @@
+/*Copyright © 2020 Rishabh Rao.
+All Rights Reserved.*/
+
+.header {
+	position: sticky;
+	height: fit-content;
+	top: 0;
+	z-index: 100;
+	display: flex;
+	/* flex-direction: column; */
+	justify-content: space-between;
+	padding: 5px;
+	background-color: #eb8d00;
+}
+
+.header div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header div > img {
+	object-fit: contain;
+	height: 50px;
+}
+
+.header h4 {
+	margin: 10px;
+}
+
+.header__right {
+	display: flex;
+	text-align: right;
+}

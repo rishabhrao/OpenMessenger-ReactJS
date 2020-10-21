@@ -1,0 +1,44 @@
+/*Copyright © 2020 Rishabh Rao.
+All Rights Reserved.*/
+
+.Chat {
+	text-align: center;
+}
+
+.form_container {
+	box-sizing: border-box;
+	position: fixed;
+	bottom: 0px;
+	padding: 20px;
+	width: 100%;
+}
+
+.chat__form {
+	padding: 20px;
+	z-index: 1;
+	background-color: #e9e9eb;
+	position: relative;
+	width: 100%;
+	margin: 0px;
+	box-sizing: border-box;
+	box-shadow: 10px 10px 10px grey;
+	border-radius: 1em;
+}
+
+.chat__formControl {
+	display: flex !important;
+	flex-direction: row !important;
+}
+
+.chat__input {
+	flex: 1;
+}
+
+.chat__iconButton {
+	flex: 0;
+}
+
+.messages__container {
+	z-index: "-1";
+	margin-bottom: 125px;
+}

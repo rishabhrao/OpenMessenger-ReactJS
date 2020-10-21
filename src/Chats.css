@@ -1,0 +1,32 @@
+/*Copyright © 2020 Rishabh Rao.
+All Rights Reserved.*/
+
+.chats {
+	justify-content: center;
+	width: 70vw;
+	padding: 25px;
+	height: fit-content;
+	/* display: flex;
+	flex-direction: column; */
+	background-color: white !important;
+	border: 0px solid #eb8d00 !important;
+	padding: 30px !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+	margin-bottom: 15px;
+	/* border-radius: 20px !important; */
+}
+
+.button {
+	width: 100%;
+	padding: 25px;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #eb8d00 !important;
+	padding: 30px !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+	/* border-radius: 20px !important; */
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 10px 20px rgba(0, 0, 0, 0.36) !important;
+}

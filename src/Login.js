@@ -4,7 +4,7 @@ All Rights Reserved.*/
 import React from "react";
 import "./Login.css";
 import GoogleButton from "react-google-button";
-import { auth, provider } from "./firebase";
+import db, { auth, provider } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
 
@@ -12,6 +12,12 @@ function Login() {
 	const [state, dispatch] = useStateValue();
 
 	const signIn = (e) => {
+		// dispatch({
+		// 	type: actionTypes.SET_USER,
+		// 	username: "Rishabh",
+		// 	useremail: "shrikrao27@gmail.com",
+		// });
+
 		auth.signInWithPopup(provider)
 			.then((result) => {
 				dispatch({
