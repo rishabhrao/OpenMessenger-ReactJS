@@ -3,7 +3,7 @@
 ### An Open-Source Messenger for Everyone 😍
 ### Made with ♥ using ReactJS 😋 and hosted with firebase 🔥
 
-## [openmessenger.ml](https://openmessenger.ml)
+## [openmessenger-reactjs.web.app](https://openmessenger-reactjs.web.app)
 
 
 ## Some Screenshots:
